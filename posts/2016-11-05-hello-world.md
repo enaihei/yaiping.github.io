@@ -1,0 +1,10 @@
+---
+layout: default
+---
+
+
+<h2>{{ page.title }}</h2>
+
+<p>这是我的第一篇文章</p>
+
+<p>{{ page.date | date_to_string }}</p>
