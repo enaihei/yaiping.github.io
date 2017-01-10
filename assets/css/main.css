@@ -42,6 +42,40 @@ border-collapse: separate;
 border-spacing: 2px;
 border-color: gray;
 }
+/* ------后加入table样式 begin  */
+table {
+  width: 100%;
+  max-width: 65em;
+  border: 1px solid #dedede;
+  margin: 15px auto;
+  border-collapse: collapse;
+  empty-cells: show;
+}
+
+table th, table td {
+  height: 35px;
+  border: 1px solid #dedede;
+  padding: 0 10px;
+}
+table th {
+  font-weight: bold;
+  background: rgba(158,188,226,0.2);
+}
+table tbody tr:nth-child(2n) {
+  background: rgba(158,188,226,0.12);
+}
+table tr:hover {
+  background: #efefef;
+}
+table th {
+  white-space: nowrap;
+}
+table td:nth-child(1) {
+  white-space: nowrap;
+}
+
+/* ------后加入table样式 end  */
+
 ul, menu, dir {
 display: block;
 list-style-type: disc;
