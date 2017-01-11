@@ -1,8 +1,8 @@
 ---
 layout: post-index
-permalink: /posts/
 title: All Posts
 description: "An archive of posts."
+comments: false
 ---
 
 {% for post in site.posts %}
@@ -25,7 +25,7 @@ description: "An archive of posts."
           </ul>
         </article>
         <article>
-          <h2 id="{{ next_year }}-ref">{{next_year}}</h2>
+          <h2 id="{{ next_year }}-ref" class="year-heading">{{next_year}}</h2>
           <ul>
         {% endif %}
     {% endif %}
