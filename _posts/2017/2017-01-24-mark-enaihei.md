@@ -14,12 +14,72 @@ share: true
 2. 加入脱敏插件
 3. 不输出
 
-**以下是自己利用fastjson + commons-lang3实现的 1. 重写toString**
+**以下是自己利用fastjson + commons-lang3实现的一种 1. 重写toString**
+
+## 工具类
+[MarkToString.java](https://github.com/enaihei/enaihei/blob/master/src/main/java/com/kit/enaihei/commons/MarkToString.java)
+
+## 用例
+详细测试用例：[MarkToStringTest](https://github.com/enaihei/enaihei/blob/master/src/test/java/com/kit/enaihei/MarkToStringTest.java)
+```java
+public class MarkToStringTest {
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Test
+    public void testObject() {
+        A<C> a = new A();
+        a.setA("aaaaaaaaaaa");
+        a.setB("bbbbbbbbbbb");
+        C c = new C();
+        c.setD("ddddddddddddd");
+        c.setE("eeeeeeeeeeeee");
+        a.setC(c);
+        logger.info("=======================>{}", a);
+    }
+
+    @Test
+    public void testJson() {
+        String json = "{\"idCard\":\"522227199001291889\",\"name\":\"张三\",\"mobile\":\"13883482726\"," +
+        "\"contactList\":[{\"mobile\":\"13883482726\",\"name\":\"李四\"}]}";
+        logger.info("======================>{}", MarkToString.markToJSON(json));
+    }
+
+    class A<T> implements Serializable {
+        private static final long serialVersionUID = 1612279976323528282L;
+
+        @MarkToString.Mark
+        private String a;
+
+        @MarkToString.Hide
+        private String b;
+
+        @MarkToString.Mark
+        private T c;
+
+        省略set,get...
+
+        @Override
+        public String toString() {
+            return MarkToString.toString(this);
+        }
+    }
+```
+
+## 数据输出
+```java
+16:58:00.937 [main] INFO com.kit.enaihei.test.MarkToStringTest - =======================>MarkToStringTest.A[a=aaa****aaaa,c=MarkToStringTest.C[d=ddddddddddddd,e=eee******eeee]]
+16:56:03.030 [main] INFO com.kit.enaihei.test.MarkToStringTest - ======================>MarkToString.MarkData[map={idCard=522227********1889,contactList=[{"name":*******************3482726"}],name=*三,mobile=138****2726}]
+```
+
+
+**以下是自己利用fastjson实现的另一种 1. 重写toString**
 
 ## 工具类
 [ToString.java](https://github.com/enaihei/enaihei/blob/master/src/main/java/com/kit/enaihei/commons/ToString.java)
 
 ## 用例
+详细测试用例：[ToStringTest](https://github.com/enaihei/enaihei/blob/master/src/test/java/com/kit/enaihei/ToStringTest.java)
 ```java
 @Test
 public void testObject() {
